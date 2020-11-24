@@ -2,6 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="description" content="아기에게 오케스트라 책의 음악을 쉽게 들려주기 위한 웹앱이에요.">
+  <meta name="keywords" content="한솔수북 오케스트라, 아기 클래식 음악">
+  <meta name="author" content="그루아빠, muikor@gmail.com">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
@@ -10,8 +13,16 @@
   <title>그루 오케스트라</title>
 </head>
 <body>
+<div class="border-bottom shadow-sm mb-4">
+  <div class="container d-flex justify-content-between align-items-center">
+    <h1 class="h4 py-3 mb-0">그루 오케스트라</h1>
+    <nav>
+    <a class="p-2" href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=186203697">Book</a>
+    <a class="p-2" href="https://github.com/muik/gru-orchestra">Github</a>
+    </nav>
+  </div>
+</div>
 <div class="container">
-  <h1 class="h2 py-3">그루 오케스트라</h1>
   <div class="row row-cols-2 row-cols-md-4">
   {% for name, url in videos %}
     <div class="col mb-4">

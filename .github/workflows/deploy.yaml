@@ -1,0 +1,26 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - 'main'
+      - 'release/*'
+    paths:
+      - '*.py'
+      - '*.yaml'
+      - 'templates/**.html'
+      - 'requirements*.txt'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Deploy
+        uses: google-github-actions/deploy-appengine@main
+        with:
+          credentials: ${{ secrets.GCP_SA_KEY }}
+

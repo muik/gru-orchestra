@@ -53,6 +53,7 @@ function hidePlayingStatus(video) {
 $(function() {
     $('video').on('click', function() {
         if (this.paused) {
+            this.currentTime = 0;
             this.play();
         } else {
             this.pause();

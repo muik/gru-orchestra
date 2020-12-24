@@ -3,3 +3,31 @@
 
 ## 개발
 https://cloud.google.com/appengine/docs/standard/python3/quickstart
+
+### 환경 초기화
+```
+python3 -m venv env
+source env/bin/activate
+pip install  -r requirements.txt
+```
+
+### 환경 로드
+```
+source env/bin/activate
+```
+
+### 로컬 개발 서버
+```
+python main.py
+open http://localhost:8080
+```
+
+### 배포
+```
+gcloud app deploy
+```
+
+### 테스트
+```
+pytest
+```

@@ -18,7 +18,7 @@ class VideoUrlFetcher:
         body = self._get_html_body(qrid)
         name, next_url = self._extract_data(body)
 
-        return name, self._get_video_url(next_url)
+        return name, next_url
 
     def _get_html_body(self, qrid):
         url = f'https://m.site.naver.com/qrcode/view.nhn?v={qrid}'
@@ -34,10 +34,3 @@ class VideoUrlFetcher:
         url = soup.select('#videoItemArea li.first a')[0].get('href')
 
         return name, url
-
-    def _get_video_url(self, url):
-        res = self._sess.get(url, allow_redirects=False)
-        res.raise_for_status()
-        assert res.status_code == 302
-
-        return res.next.url

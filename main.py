@@ -12,6 +12,10 @@ config = {
     "CACHE_DEFAULT_TIMEOUT": 300
 }
 
+# for disabling to cache js/css files on development
+if __name__ == '__main__':
+    config["SEND_FILE_MAX_AGE_DEFAULT"] = 0
+
 # If `entrypoint` is not defined in app.yaml, App Engine will look for an app
 # called `app` in `main.py`.
 app = Flask(__name__)

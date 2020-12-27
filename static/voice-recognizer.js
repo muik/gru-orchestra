@@ -26,7 +26,17 @@ function hideVoiceError() {
 }
 
 $(function() {
-    let recognizerResolver = null;
+    let recognizerResolver = createModel();
+
+    // for develop
+    // TODO preload when wifi connection
+    if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+        recognizerResolver.then(recognizer => {
+            recognizer.ensureModelLoaded().then(v => {
+                recognizer.warmUpModel();
+            });
+        });
+    }
 
     const voiceSwitchButton = $('#voiceSwitch').change(function() {
         if (this.checked) {
@@ -47,7 +57,7 @@ $(function() {
         hideVoiceError();
         startVoiceLoading();
 
-        (recognizerResolver || (recognizerResolver = createModel()))
+        recognizerResolver
           .then(recognizer => {
               if (isOff()) {
                   return Promise.reject('canceled');
@@ -57,6 +67,11 @@ $(function() {
               return recognizer.ensureModelLoaded()
                 .then(() => { return recognizer; });
           }).then(recognizer => {
+              if (isOff()) {
+                  return Promise.reject('canceled');
+              }
+              recognizer.warmUpModel();
+
               if (isOff()) {
                   return Promise.reject('canceled');
               }

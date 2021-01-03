@@ -54,7 +54,10 @@
 
 <!-- for voice recognizer -->
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/speech-commands@0.4.2/dist/speech-commands.min.js"></script>
+<!--
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/speech-commands@0.4.2/dist/speech-commands.js"></script>
+-->
+<script src="{{ url_for('static', filename='speech-commands.js') }}"></script>
 
 <script type="text/javascript">
 function showPlayingStatus(video) {

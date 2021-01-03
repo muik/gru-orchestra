@@ -308,6 +308,9 @@
                             if (this.freqDataQueue.length > this.numFrames) {
                                 this.freqDataQueue.shift();
                             }
+                            if (this.timeDataQueue.length > this.numFrames) {
+                                this.timeDataQueue.shift();
+                            }
                             shouldFire = this.tracker.tick();
                             if (!shouldFire) return [3, 2];
                             freqData = flattenQueue(this.freqDataQueue);
@@ -1279,7 +1282,7 @@
                                                 }
                                             }
                                             if (wordDetected) {
-                                                callback({ scores: scores, spectrogram: spectrogram, embedding: embedding });
+                                                callback({ scores: scores, spectrogram: spectrogram, embedding: embedding, timeData: timeData.data() });
                                             }
                                             return [2, wordDetected];
                                     }
@@ -1294,6 +1297,7 @@
                                 columnTruncateLength: this.nonBatchInputShape[1],
                                 suppressionTimeMillis: suppressionTimeMillis,
                                 spectrogramCallback: spectrogramCallback,
+                                includeRawAudio: config.includeRawAudio,
                                 overlapFactor: overlapFactor
                             });
                             return [4, this.audioDataExtractor.start(config.audioTrackConstraints)];

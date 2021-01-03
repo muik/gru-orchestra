@@ -34,6 +34,7 @@ $(function() {
         recognizerResolver.then(recognizer => {
             recognizer.ensureModelLoaded().then(v => {
                 recognizer.warmUpModel();
+                console.log(recognizer);
             });
         });
     }
@@ -123,6 +124,7 @@ async function createModel() {
 async function enableListen(recognizer) {
     const classLabels = recognizer.wordLabels(); // get class labels
     log('model - name: ' + recognizer.model.name);
+    window.recognizer = recognizer;
 
     // listen() takes two arguments:
     // 1. A callback function that is invoked anytime a word is recognized.
@@ -132,6 +134,9 @@ async function enableListen(recognizer) {
         if (scores[0] > 0.7) {
             return;
         }
+
+        console.log(result);
+        debugger;
 
         const i = tf.argMax(scores).arraySync();
         const label = classLabels[i];
@@ -147,9 +152,12 @@ async function enableListen(recognizer) {
             video.click();
         }
     }, {
-        includeSpectrogram: false,
+        includeSpectrogram: true,
         probabilityThreshold: 0.75,
         invokeCallbackOnNoiseAndUnknown: false,
+        includeRawAudio: true,
         overlapFactor: 0.5
+    }).then(function() {
+        recognizer.audioDataExtractor.includeRawAudio = true;
     });
 }

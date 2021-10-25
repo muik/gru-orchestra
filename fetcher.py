@@ -23,7 +23,7 @@ class VideoUrlFetcher:
     def _get_html_body(self, qrid):
         url = f'https://m.site.naver.com/qrcode/view.nhn?v={qrid}'
 
-        res = self._sess.get(url)
+        res = self._sess.get(url, verify=False)
         res.raise_for_status()
 
         return res.text
